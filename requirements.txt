@@ -1,7 +1,7 @@
-Package       Version  
-------------- ---------
+autopep8      1.6.0    
 click         8.0.3    
 Flask         2.0.2    
+gunicorn      20.1.0   
 itsdangerous  2.0.1    
 Jinja2        3.0.3    
 joblib        1.1.0    
@@ -9,7 +9,10 @@ MarkupSafe    2.0.1
 nltk          3.6.7    
 pip           20.0.2   
 pkg-resources 0.0.0    
+pycodestyle   2.8.0    
+rake-nltk     1.0.6    
 regex         2022.1.18
 setuptools    44.0.0   
+toml          0.10.2   
 tqdm          4.62.3   
 Werkzeug      2.0.3    
