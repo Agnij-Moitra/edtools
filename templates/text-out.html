@@ -1,0 +1,12 @@
+{% extends "layout.html" %} {% block body %}
+<div class="text-content">
+  <h2>Summary</h2>
+  <p>{{ summary }}</p>
+  <h3>Keywords</h3>
+  <p>
+    {% for i in keywords %}
+    <span class="badge rounded-pill bg-danger">{{ i }}</span>
+  {% endfor %}
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block body %}
+<form
+  action="/Text-Summerizer"
+  method="post"
+  class="bs-component"
+  style="margin-left: 10%;"
+>
+  <div class="form-group">
+    <label class="col-form-label col-form-label-lg mt-4" for="inputLarge"
+      ><h2>Text Summerizer</h2></label>
+      <br>
+    <textarea
+      name="text"
+      class="input col-form-label col-form-label-lg mt-4"
+      placeholder="Enter Text"
+      autofocus=""
+      required
+      style="max-height: 450px; background-color: transparent; border-radius: 10px; width: 85%; height: 80%;"
+    ></textarea>
+    <br /> <br>
+    <button
+      type="submit"
+      class="btn btn-primary form-control form-control-lg"
+      style="padding: 10px; width: 120px; border-radius: 10px"
+    >
+      Recommend
+    </button>
+  </div>
+</form>
+{% endblock %}
