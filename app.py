@@ -1,5 +1,5 @@
-#!/bin/python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# coding: utf-8
 
 from flask import Flask, render_template, request
 import nltk
@@ -18,8 +18,9 @@ def index():
 @app.route("/Text-Summerizer", methods=["GET", "POST"])
 def text_summerizer():
     if request.method == "POST":
-        summary = generate_summary(request.form.get("text"))
-        if summary[0] == "":
+        try:
+            summary = generate_summary(request.form.get("text"))
+        except IndexError:
             return apology("Too short to summerize")
         return render_template("text-out.html", summary=summary[0], keywords=summary[1])
     return render_template("Text-Summerizer.html")
