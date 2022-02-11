@@ -4,6 +4,7 @@
 from flask import Flask, render_template, request
 import nltk
 from summerizer import generate_summary
+from ytcaptions import get_captions
 nltk.download('stopwords')
 nltk.download('punkt')
 app = Flask(__name__)
@@ -18,11 +19,24 @@ def index():
 @app.route("/Text-Summerizer", methods=["GET", "POST"])
 def text_summerizer():
     if request.method == "POST":
-        try:
-            summary = generate_summary(request.form.get("text"))
-        except IndexError:
-            return apology("Too short to summerize")
-        return render_template("text-out.html", summary=summary[0], keywords=summary[1])
+        if request.form.get("text") != "":
+            try:
+                summary = generate_summary(request.form.get("text"))
+            except IndexError:
+                return apology("Too short to summerize")
+            return render_template("text-out.html", summary=summary[0], keywords=summary[1])
+        if request.form.get("ytlnk") != "":
+            captions = get_captions(request.form.get("ytlnk"))
+            if captions == "Invalid link" or captions == "Couldn't find transcript":
+                return apology(captions)
+            else:
+                # try:
+                summary = generate_summary(captions)
+                # except IndexError:
+                #     return apology("Too short to summerize")
+                return render_template("text-out.html", summary=summary[0], keywords=summary[1])
+        else:
+            return apology("Please enter text or youtube link.")
     return render_template("Text-Summerizer.html")
 
 
