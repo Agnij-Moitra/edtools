@@ -25,16 +25,16 @@ def text_summerizer():
             except IndexError:
                 return apology("Too short to summerize")
             return render_template("text-out.html", summary=summary[0], keywords=summary[1])
-        if request.form.get("ytlnk") != "":
-            captions = get_captions(request.form.get("ytlnk"))
-            if captions == "Invalid link" or captions == "Couldn't find transcript":
-                return apology(captions)
-            else:
-                # try:
-                summary = generate_summary(captions)
-                # except IndexError:
-                #     return apology("Too short to summerize")
-                return render_template("text-out.html", summary=summary[0], keywords=summary[1])
+        # elif request.form.get("ytlnk") != "":
+        #     captions = get_captions(request.form.get("ytlnk"))
+        #     if captions == "Invalid link" or captions == "Couldn't find transcript":
+        #         return apology(captions)
+        #     else:
+        #         # try:
+        #         summary = generate_summary(captions)
+        #         # except IndexError:
+        #         #     return apology("Too short to summerize")
+        #         return render_template("text-out.html", summary=summary[0], keywords=summary[1])
         else:
             return apology("Please enter text or youtube link.")
     return render_template("Text-Summerizer.html")
