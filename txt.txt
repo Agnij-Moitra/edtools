@@ -1,0 +1,18 @@
+APA
+title*
+from page
+to page
+publisher*
+
+contributor
+ - initials
+ - last name
+
+volume
+
+year published*
+
+"Last Name, Initial. (Year), tile, publisher, volume(issue), url."
+
+MLA
+"Last Name, Initial. "Title", vol. 2, year, url"

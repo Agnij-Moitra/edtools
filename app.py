@@ -8,6 +8,7 @@ from plagrism import check_plagrism
 from summerizer import generate_summary
 from readability import get_readability
 from werkzeug.utils import secure_filename
+from txtfile import get_txt
 # from ytcaptions import get_captions
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -105,8 +106,15 @@ def readablility():
                 f.save(secure_filename(f.filename))
             except FileNotFoundError:
                 return apology("Please upload a file or enter text!")
-            ext = os.path.splitext(f"{file_path}")
-            print(file_path)
+            ext = os.path.splitext(f"{file_path}")[1]
+            if ext == ".txt":
+                text = get_txt(file_path=file_path)
+                return render_template("Readability-Out.html", index=get_readability(text))
+            if ext == ".pdf":
+                text = get_txt(file_path=file_path)
+                return render_template("Readability-Out.html", index=get_readability(text))    
+            os.remove(file_path)
+            return ext
 
         return render_template("Readability-Out.html", index=get_readability(txt))
     return render_template("Readability-Checker.html")
