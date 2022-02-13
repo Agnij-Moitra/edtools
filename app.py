@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import os
 from flask import Flask, render_template, request, request_started
 import nltk
 from plagrism import check_plagrism
 from summerizer import generate_summary
 from readability import get_readability
+from werkzeug.utils import secure_filename
 # from ytcaptions import get_captions
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -95,8 +97,17 @@ def citation():
 def readablility():
     if request.method == "POST":
         txt = request.form.get("readalibity_text")
-        if len(txt) <= 10:
-            return apology("Too short to determine readability!")
+        if txt == "":
+            f = request.files['readabilityfile']
+            basepath = os.path.dirname(__file__)
+            file_path = os.path.join(basepath, secure_filename(f.filename))
+            try:
+                f.save(secure_filename(f.filename))
+            except FileNotFoundError:
+                return apology("Please upload a file or enter text!")
+            ext = os.path.splitext(f"{file_path}")
+            print(file_path)
+
         return render_template("Readability-Out.html", index=get_readability(txt))
     return render_template("Readability-Checker.html")
 

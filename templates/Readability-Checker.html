@@ -4,6 +4,7 @@
   method="post"
   class="bs-component"
   style="margin-left: 10%"
+  enctype="multipart/form-data"
 >
   <div class="form-group">
     <label class="col-form-label col-form-label-lg mt-4" for="inputLarge"
@@ -20,8 +21,26 @@
         background-color: transparent;
         border-radius: 10px;
         width: 85%;
+        padding: 10px;
       "
-    ></textarea>
+    ></textarea
+    ><br />
+    <br />
+    <h4>Or Upload a file</h4>
+    <input
+      class="form-control form-control-lg"
+      type="file"
+      name="readabilityfile"
+      id="inputLarge"
+      style="
+        padding: 5 px;
+        background-color: transparent;
+        border-radius: 10px;
+        width: 85%;
+      "
+      .
+      accept=".txt, .pdf, .docx, .doc, .epub"
+    />
     <br />
     <br />
     <button
