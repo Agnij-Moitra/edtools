@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, request_started
 import nltk
+from plagrism import check_plagrism
 from summerizer import generate_summary
-from ytcaptions import get_captions
+# from ytcaptions import get_captions
 nltk.download('stopwords')
 nltk.download('punkt')
 app = Flask(__name__)
@@ -36,12 +37,19 @@ def text_summerizer():
         #         #     return apology("Too short to summerize")
         #         return render_template("text-out.html", summary=summary[0], keywords=summary[1])
         else:
-            return apology("Please enter text or youtube link.")
+            return apology("No text entered!")
     return render_template("Text-Summerizer.html")
 
 
-@app.route("/Plagrism-Checker", methods=["GET"])
+@app.route("/Plagrism-Checker", methods=["GET", "POST"])
 def plagrism():
+    if request.method == "POST":
+        text1 = request.form.get("text1")
+        text2 = request.form.get("text2")
+        if text1 or text2 != "":
+            return render_template("Plagrism-Out.html", plagrism_msg=check_plagrism(text1, text2))
+        else:
+            return apology("No text entered!")
     return render_template("Plagrism-Checker.html")
 
 

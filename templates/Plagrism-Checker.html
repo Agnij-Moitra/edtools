@@ -1,6 +1,54 @@
 {% extends "layout.html" %} {% block body %}
-<div class="text-content">
-    
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum facere in nam, officiis aspernatur consectetur aliquid sequi possimus et. Sint.</p>
+<form
+  action="/Plagrism-Checker"
+  method="post"
+  class="bs-component"
+  style="margin-left: 10%"
+>
+  <div class="form-group">
+    <label class="col-form-label col-form-label-lg mt-4" for="inputLarge"
+      ><h2>Plagrism Checker</h2></label
+    >
+    <br />
+    <textarea
+      name="text1"
+      class="input col-form-label col-form-label-lg mt-4"
+      placeholder="Enter Text"
+      rows="2"
+      style="
+        max-height: 30vh;
+        background-color: transparent;
+        border-radius: 10px;
+        width: 85%;
+      "
+    ></textarea>
+    <textarea
+      name="text2"
+      class="input col-form-label col-form-label-lg mt-4"
+      placeholder="Enter Text"
+      rows="2"
+      style="
+        max-height: 30vh;
+        background-color: transparent;
+        border-radius: 10px;
+        width: 85%;
+      "
+    ></textarea>
+    <br />
+    <br />
+    <button
+      type="submit"
+      class="btn btn-primary form-control form-control-lg"
+      style="
+        padding: 10px;
+        width: 120px;
+        border-radius: 10px;
+        background-color: rgba(255, 0, 0, 0.692);
+        border-color: rgba(255, 0, 0, 0.692);
+      "
+    >
+      Check For Plagrism
+    </button>
   </div>
+</form>
 {% endblock %}
