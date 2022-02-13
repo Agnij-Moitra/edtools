@@ -26,7 +26,7 @@ def text_summerizer():
                 summary = generate_summary(request.form.get("text"))
             except IndexError:
                 return apology("Too short to summerize")
-            return render_template("text-out.html", summary=summary[0], keywords=summary[1])
+            return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
         # elif request.form.get("ytlnk") != "":
         #     captions = get_captions(request.form.get("ytlnk"))
         #     if captions == "Invalid link" or captions == "Couldn't find transcript":
@@ -54,8 +54,40 @@ def plagrism():
     return render_template("Plagrism-Checker.html")
 
 
-@app.route("/Citation-Generator", methods=["GET"])
+@app.route("/Citation-Generator", methods=["GET", "POST"])
 def citation():
+    if request.method == "POST":
+        title = request.form.get("title").capitalize()
+        publisher = request.form.get("publisher").capitalize()
+        year = request.form.get("year")
+        first = request.form.get("first").capitalize()
+        last = request.form.get("last").capitalize()
+        vol = request.form.get("volume")
+
+        if first == "" and last == "" and vol == "":
+            apa = f"({year}), {title}, {publisher}"
+            mla = f'"{title}", {publisher}, {year}'
+            return render_template("Citation-Out.html", apa=apa, mla=mla)
+
+        if last == "" and vol == "":
+            return apology("Please enter last name!")
+        
+        if first == "" and vol == "":
+            apa = f"{last}, ({year}), {title}, {publisher}"
+            mla = f'{last}, "{title}", {publisher}, {year}'
+            return render_template("Citation-Out.html", apa=apa, mla=mla)
+
+        if vol == "":
+            apa = f"{last}, {first}, ({year}), {title}, {publisher}"
+            mla = f'{last}, {first}, "{title}", {publisher}, {year}'
+            return render_template("Citation-Out.html", apa=apa, mla=mla)
+        
+        else:
+            apa = f"{last}, {first}, ({year}), {title}, {vol}, {publisher}"
+            mla = f'{last}, {first}, "{title}", vol. {vol}, {publisher}, {year}'
+            return render_template("Citation-Out.html", apa=apa, mla=mla)
+
+
     return render_template("Citation-Generator.html")
 
 
