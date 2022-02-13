@@ -10,18 +10,18 @@ def get_readability(intxt):
     avgl = float((letterno / wordsno)) * 100
     s = float((sentenceno / wordsno)) * 100
 
-    # inspired from: https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
+    # https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
 
     index = int(round((0.0588 * avgl) - (0.296 * s) - 15.8))
 
     if index < 1:
-        return "Before Grade 1"
+        return "Readability Index: Before Grade 1"
     elif index >= 13 and index < 16:
-        return "College Level"
+        return "Readability Index: College Level"
     elif index >= 16:
         return "Expert"
     else:
-        return f"Grade {index}"
+        return f"Readability Index: Grade {index}"
 
 
 def letters(string):

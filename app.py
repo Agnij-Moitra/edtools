@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, request_started
 import nltk
 from plagrism import check_plagrism
 from summerizer import generate_summary
+from readability import get_readability
 # from ytcaptions import get_captions
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -58,8 +59,13 @@ def citation():
     return render_template("Citation-Generator.html")
 
 
-@app.route("/Readability-Checker", methods=["GET"])
+@app.route("/Readability-Checker", methods=["GET", "POST"])
 def readablility():
+    if request.method == "POST":
+        txt = request.form.get("readalibity_text")
+        if len(txt) <= 10:
+            return apology("Too short to determine readability!")
+        return render_template("Readability-Out.html", index=get_readability(txt))
     return render_template("Readability-Checker.html")
 
 
