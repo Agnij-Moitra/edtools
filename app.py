@@ -44,35 +44,42 @@ def text_summerizer():
             ext = os.path.splitext(f"{file_path}")[1]
             if ext == ".txt":
                 text = get_txt(file_path)
-                os.remove(file_path)
                 try:
                     summary = get_summary(text)
                 except IndexError:
+                    os.remove(file_path)
                     return apology("Too short to summerize")
+                os.remove(file_path)
                 return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
             if ext == ".pdf":
                 text = get_pdf(file_path)
-                os.remove(file_path)
+        
                 try:
                     summary = get_summary(text)
                 except IndexError:
+                    os.remove(file_path)
                     return apology("Too short to summerize")
+                os.remove(file_path)
                 return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
             if ext == ".docx":
                 text = get_docx(file_path)
-                os.remove(file_path)
+                
                 try:
                     summary = get_summary(text)
                 except IndexError:
+                    os.remove(file_path)
                     return apology("Too short to summerize")
+                os.remove(file_path)
                 return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
             if ext == ".epub":
                 text = get_epub(file_path)
-                os.remove(file_path)
+                
                 try:
                     summary = get_summary(text)
                 except IndexError:
+                    os.remove(file_path)
                     return apology("Too short to summerize")
+                os.remove(file_path)
                 return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
             return apology("Please upload a file or enter text!")
     return render_template("Text-Summerizer.html")
