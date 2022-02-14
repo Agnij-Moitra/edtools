@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from bs4 import BeautifulSoup
+from ebooklib import epub
+import ebooklib
+import docx
 from difflib import SequenceMatcher
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
@@ -24,7 +28,6 @@ def read_article(text):
     sentences = []
 
     for sentence in article:
-        print(sentence)
         sentences.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
     sentences.pop()
 
@@ -178,6 +181,56 @@ def sentences(string):
 
 def check_plagrism(txt1, txt2):
     return f"The texts are {int(SequenceMatcher(None, txt1, txt2).ratio() * 100)}% similar"
+
+
+def get_docx(file_path):
+    extracted_txt = ""
+    doc = docx.Document(file_path)
+    for para in doc.paragraphs:
+        extracted_txt += str(para.text)
+    return extracted_txt
+
+
+blacklist = ['[document]', 'noscript', 'header',
+             'html', 'meta', 'head', 'input', 'script']
+
+
+def get_epub(file_path):
+    txt = str(epub2text(file_path)[1].replace("\n", "").rstrip())
+    return txt
+
+
+def epub2thtml(epub_path):
+    book = epub.read_epub(epub_path)
+    chapters = []
+    for item in book.get_items():
+        if item.get_type() == ebooklib.ITEM_DOCUMENT:
+            chapters.append(item.get_content())
+    return chapters
+
+
+def chap2text(chap):
+    output = ''
+    soup = BeautifulSoup(chap, 'html.parser')
+    text = soup.find_all(text=True)
+    for t in text:
+        if t.parent.name not in blacklist:
+            output += '{} '.format(t)
+    return output
+
+
+def thtml2ttext(thtml):
+    Output = []
+    for html in thtml:
+        text = chap2text(html)
+        Output.append(text)
+    return Output
+
+
+def epub2text(epub_path):
+    chapters = epub2thtml(epub_path)
+    ttext = thtml2ttext(chapters)
+    return ttext
 
 
 # from youtube_transcript_api import YouTubeTranscriptApi

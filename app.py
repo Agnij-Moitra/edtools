@@ -4,7 +4,7 @@
 import os
 from flask import Flask, render_template, request, request_started
 import nltk
-from supplementry import check_plagrism, generate_summary, get_pdf, get_readability, get_txt
+from supplementry import check_plagrism, generate_summary, get_epub, get_pdf, get_readability, get_txt, get_docx, get_epub
 from werkzeug.utils import secure_filename
 # from ytcaptions import get_captions
 nltk.download('stopwords')
@@ -71,7 +71,7 @@ def citation():
 
         if last == "" and vol == "":
             return apology("Please enter last name!")
-        
+
         if first == "" and vol == "":
             apa = f"{last}, ({year}), {title}, {publisher}"
             mla = f'{last}, "{title}", {publisher}, {year}'
@@ -81,12 +81,11 @@ def citation():
             apa = f"{last}, {first}, ({year}), {title}, {publisher}"
             mla = f'{last}, {first}, "{title}", {publisher}, {year}'
             return render_template("Citation-Out.html", apa=apa, mla=mla)
-        
+
         else:
             apa = f"{last}, {first}, ({year}), {title}, {vol}, {publisher}"
             mla = f'{last}, {first}, "{title}", vol. {vol}, {publisher}, {year}'
             return render_template("Citation-Out.html", apa=apa, mla=mla)
-
 
     return render_template("Citation-Generator.html")
 
@@ -105,11 +104,17 @@ def readablility():
                 return apology("Please upload a file or enter text!")
             ext = os.path.splitext(f"{file_path}")[1]
             if ext == ".txt":
-                text = get_txt(file_path=file_path)
+                text = get_txt(file_path)
                 return render_template("Readability-Out.html", index=get_readability(text))
             if ext == ".pdf":
-                text = get_txt(file_path=file_path)
-                return render_template("Readability-Out.html", index=get_readability(text))    
+                text = get_pdf(file_path)
+                return render_template("Readability-Out.html", index=get_readability(text))
+            if ext == ".docx":
+                text = get_docx(file_path)
+                return render_template("Readability-Out.html", index=get_readability(text))
+            if ext == ".epub":
+                text = get_epub(file_path)
+                return render_template("Readability-Out.html", index=get_readability(text))
             os.remove(file_path)
             return ext
 
