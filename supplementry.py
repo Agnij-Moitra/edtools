@@ -72,7 +72,7 @@ def build_similarity_matrix(sentences, stop_words):
     return similarity_matrix
 
 
-def generate_summary(text, top_n=5):
+def get_summary(text, top_n=5):
     stop_words = stopwords.words('english')
     summarize_text = []
 
@@ -133,7 +133,7 @@ def get_readability(intxt):
     elif index >= 13 and index < 16:
         return "Readability Index: College Level"
     elif index >= 16:
-        return "Expert"
+        return "Readability Index: Expert"
     else:
         return f"Readability Index: Grade {index}"
 

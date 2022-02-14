@@ -3,19 +3,43 @@
   action="/Text-Summerizer"
   method="post"
   class="bs-component"
-  style="margin-left: 10%;"
+  style="margin-left: 10%"
+  enctype="multipart/form-data"
 >
   <div class="form-group">
     <label class="col-form-label col-form-label-lg mt-4" for="inputLarge"
-      ><h2>Text Summerizer</h2></label>
-      <br>
+      ><h2>Text Summerizer</h2></label
+    >
+    <br />
     <textarea
       name="text"
       class="input col-form-label col-form-label-lg mt-4"
       placeholder="Enter Text"
       rows="8"
-      style="max-height: 30vh; background-color: transparent; border-radius: 10px; width: 85%;"
+      style="
+        max-height: 30vh;
+        background-color: transparent;
+        border-radius: 10px;
+        width: 85%;
+      "
     ></textarea>
+    <br />
+    <br />
+    <h4>Or Upload a file</h4>
+    <input
+      class="form-control form-control-lg"
+      type="file"
+      name="summerizerfile"
+      id="inputLarge"
+      style="
+        padding: 5 px;
+        background-color: transparent;
+        border-radius: 10px;
+        width: 85%;
+      "
+      .
+      accept=".txt, .pdf, .docx, .doc, .epub"
+    />
     <!-- <br>
     <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Youtube Link</label>
     <br>
@@ -25,11 +49,18 @@
         name="ytlnk"
         style="padding: 5 px;background-color: transparent; border-radius: 10px; width: 85%;"
     /> -->
-    <br> <br>
+    <br />
+    <br />
     <button
       type="submit"
       class="btn btn-primary form-control form-control-lg"
-      style="padding: 10px; width: 120px; border-radius: 10px; background-color: rgba(255, 0, 0, 0.692); border-color: rgba(255, 0, 0, 0.692);"
+      style="
+        padding: 10px;
+        width: 120px;
+        border-radius: 10px;
+        background-color: rgba(255, 0, 0, 0.692);
+        border-color: rgba(255, 0, 0, 0.692);
+      "
     >
       Submit
     </button>

@@ -4,9 +4,8 @@
 import os
 from flask import Flask, render_template, request, request_started
 import nltk
-from supplementry import check_plagrism, generate_summary, get_epub, get_pdf, get_readability, get_txt, get_docx, get_epub
+from supplementry import check_plagrism, get_summary, get_epub, get_pdf, get_readability, get_txt, get_docx, get_epub
 from werkzeug.utils import secure_filename
-# from ytcaptions import get_captions
 nltk.download('stopwords')
 nltk.download('punkt')
 app = Flask(__name__)
@@ -23,7 +22,7 @@ def text_summerizer():
     if request.method == "POST":
         if request.form.get("text") != "":
             try:
-                summary = generate_summary(request.form.get("text"))
+                summary = get_summary(request.form.get("text"))
             except IndexError:
                 return apology("Too short to summerize")
             return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
@@ -38,7 +37,47 @@ def text_summerizer():
         #         #     return apology("Too short to summerize")
         #         return render_template("text-out.html", summary=summary[0], keywords=summary[1])
         else:
-            return apology("No text entered!")
+            f = request.files['summerizerfile']
+            basepath = os.path.dirname(__file__)
+            file_path = os.path.join(basepath, secure_filename(f.filename))
+            try:
+                f.save(secure_filename(f.filename))
+            except FileNotFoundError:
+                return apology("Please upload a file or enter text!")
+            ext = os.path.splitext(f"{file_path}")[1]
+            if ext == ".txt":
+                text = get_txt(file_path)
+                os.remove(file_path)
+                try:
+                    summary = get_summary(text)
+                except IndexError:
+                    return apology("Too short to summerize")
+                return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
+            if ext == ".pdf":
+                text = get_pdf(file_path)
+                os.remove(file_path)
+                try:
+                    summary = get_summary(text)
+                except IndexError:
+                    return apology("Too short to summerize")
+                return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
+            if ext == ".docx":
+                text = get_docx(file_path)
+                os.remove(file_path)
+                try:
+                    summary = get_summary(text)
+                except IndexError:
+                    return apology("Too short to summerize")
+                return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
+            if ext == ".epub":
+                text = get_epub(file_path)
+                os.remove(file_path)
+                try:
+                    summary = get_summary(text)
+                except IndexError:
+                    return apology("Too short to summerize")
+                return render_template("Text-Out.html", summary=summary[0], keywords=summary[1])
+            return apology("Please upload a file or enter text!")
     return render_template("Text-Summerizer.html")
 
 
@@ -105,18 +144,22 @@ def readablility():
             ext = os.path.splitext(f"{file_path}")[1]
             if ext == ".txt":
                 text = get_txt(file_path)
+                os.remove(file_path)
                 return render_template("Readability-Out.html", index=get_readability(text))
             if ext == ".pdf":
                 text = get_pdf(file_path)
+                os.remove(file_path)
                 return render_template("Readability-Out.html", index=get_readability(text))
             if ext == ".docx":
                 text = get_docx(file_path)
+                os.remove(file_path)
                 return render_template("Readability-Out.html", index=get_readability(text))
             if ext == ".epub":
                 text = get_epub(file_path)
+                os.remove(file_path)
                 return render_template("Readability-Out.html", index=get_readability(text))
             os.remove(file_path)
-            return ext
+            return apology("Please upload a file or enter text!")
 
         return render_template("Readability-Out.html", index=get_readability(txt))
     return render_template("Readability-Checker.html")
