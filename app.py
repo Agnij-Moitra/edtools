@@ -4,11 +4,8 @@
 import os
 from flask import Flask, render_template, request, request_started
 import nltk
-from plagrism import check_plagrism
-from summerizer import generate_summary
-from readability import get_readability
+from supplementry import check_plagrism, generate_summary, get_pdf, get_readability, get_txt
 from werkzeug.utils import secure_filename
-from txtfile import get_txt
 # from ytcaptions import get_captions
 nltk.download('stopwords')
 nltk.download('punkt')
