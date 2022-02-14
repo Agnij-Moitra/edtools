@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, request_started
 import nltk
 from supplementry import check_plagrism, get_summary, get_epub, get_pdf, get_readability, get_txt, get_docx, get_epub
 from werkzeug.utils import secure_filename
+nltk.download()
 nltk.download('stopwords')
 nltk.download('punkt')
 app = Flask(__name__)
