@@ -85,7 +85,7 @@ def text_summerizer():
     return render_template("Text-Summerizer.html")
 
 
-@app.route("/Plagrism-Checker", methods=["GET", "POST"])
+@app.route("/Plagiarism-Checker", methods=["GET", "POST"])
 def plagrism():
     if request.method == "POST":
         text1 = request.form.get("text1")
