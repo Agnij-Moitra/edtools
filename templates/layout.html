@@ -38,24 +38,73 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="EdTools, a one stop study tools workscpace." />
-    <meta property="og:site_name" content="EdTools, a one stop study tools workscpace." />
+    <meta
+      property="og:site_name"
+      content="EdTools, a one stop study tools workscpace."
+    />
     <meta name="theme-color" content="#ffffff" />
     <title>EdTools</title>
     <link href="../static/favicon.ico" rel="icon" />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header>
-      <nav class="navbar">
-        <h1>
-          <div class="logo"><a href="/">EdTools 📚</a></div>
-        </h1>
-        <ul class="menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/Text-Summerizer">Text Summarizer</a></li>
-          <li><a href="/Plagrism-Checker">Plagrism Checker</a></li>
-          <li><a href="/Citation-Generator">Citation Generator</a></li>
-          <li><a href="/Readability-Checker">Readability Checker</a></li>
-        </ul>
+      <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <a class="navbar-brand" href="#"><h1>EdTools 📚</h1></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          style="font-size: 15px"
+          class="collapse navbar-collapse"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                <h5>Home</h5>
+                <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Text-Summerizer"
+                ><h5>Text Summarizer</h5></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Citation-Generator"
+                ><h5>Citation Generator</h5></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Readability-Checker"
+                ><h5>Readability Checker</h5></a
+              >
+            </li>
+          </ul>
+        </div>
       </nav>
       <div class="container">{% block body %}{% endblock %}</div>
     </header>
