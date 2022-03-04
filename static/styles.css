@@ -99,7 +99,6 @@ header {
   transition: all 0.3s ease;
   background-image: linear-gradient(135deg, #ff9a9e 10%, #f6416c 100%);
 } */
-*/
 /* .navbar .buttons input:hover {
   transform: scale(0.97);
 } */
@@ -115,7 +114,7 @@ header .text-content {
   font-size: 15px;
   margin-top: 10px;
 }
-header .play-button {
+/* header .play-button {
   position: absolute;
   right: 50px;
   bottom: 40px;
@@ -143,7 +142,7 @@ header .play-button {
   margin-left: 10px;
   border-radius: 6px;
   cursor: pointer;
-}
+} */
 @media (max-width: 850px) {
   .flex-container {
     /* flex-direction: column; */
@@ -183,7 +182,7 @@ header .play-button {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  /* width: 50%; */
 }
 #error img {
   width: 100%;
@@ -196,4 +195,36 @@ header .play-button {
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.781);
   padding: 20px 30px;
+}
+
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 74.25%; /* 4:3 ratio */
+  padding-top: 30px; /* IE6 workaround*/
+  height: 0;
+  overflow: hidden;
+  width: 100%;
+  /* max-height: 500px; */
+  margin: 0 auto;
+}
+}
+
+/* https://codepen.io/nosecreek/pen/AwBVLd */
+.video-wrapper-narrow {
+  padding-bottom: 40%;
+}
+
+iframe,object,embed,video,.videoWrapper,.video-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-js, img.vjs-poster {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
 }
